@@ -5,6 +5,7 @@ import { Button } from "../components/ui/Button";
 import { WeatherWidget } from "../components/WeatherWidget";
 import { Advisory } from "../components/Advisory";
 import { PriceChecker } from "../components/PriceChecker";
+import { ChatBot } from "../components/ChatBot";
 
 export default function Dashboard() {
     const navigate = useNavigate();
@@ -64,6 +65,8 @@ export default function Dashboard() {
                         <PriceChecker />
                     </div>
                 </section>
+
+                <ChatBot />
             </main>
 
             <footer className="mt-12 py-8 bg-white border-t border-stone-100 text-center text-stone-500 text-sm flex flex-col items-center gap-2">

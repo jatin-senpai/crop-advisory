@@ -11,6 +11,7 @@ import { User } from "./DB/db.js";
 import cropRoutes from "./routes/crop.js";
 import weatherRoutes from "./routes/weather.js";
 import priceRoutes from "./routes/prices.js";
+import geminiRoutes from "./routes/gemini.js";
 
 dotenv.config();
 
@@ -44,6 +45,7 @@ const getLocationFromPincode = async (pincode) => {
 app.use("/crop", cropRoutes);
 app.use("/weather", weatherRoutes);
 app.use("/prices", priceRoutes);
+app.use("/gemini", geminiRoutes);
 
 app.post("/signup", async (req, res) => {
   const parsedData = SignupType.safeParse(req.body);
@@ -71,8 +73,8 @@ app.post("/signup", async (req, res) => {
     password: hashedPassword,
     city,
     state,
-  pincode
-});
+    pincode
+  });
 
 
   res.status(201).json({ message: "User created successfully" });
