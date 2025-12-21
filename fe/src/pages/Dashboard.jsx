@@ -21,6 +21,7 @@ export default function Dashboard() {
             <header className="sticky top-0 z-50 w-full border-b border-stone-200 bg-white/80 backdrop-blur-md">
                 <div className="container mx-auto flex h-16 items-center justify-between px-4">
                     <div className="flex items-center gap-2 font-bold text-xl text-green-700">
+
                         <div className="bg-green-100 p-2 rounded-lg">
                             <Leaf className="h-5 w-5" />
                         </div>
@@ -43,7 +44,7 @@ export default function Dashboard() {
                             Smart Farming for a <span className="text-green-600">Better Future</span>
                         </h1>
                         <p className="text-lg text-stone-600 max-w-xl leading-relaxed">
-                            Get real-time weather updates, AI-powered crop recommendations, and live mandi prices to maximize your profits.
+                            Get real-time weather updates, crop recommendations, and live mandi prices to maximize your profits.
                         </p>
                     </div>
                     <div className="lg:col-span-1">

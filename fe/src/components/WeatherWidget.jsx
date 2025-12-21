@@ -6,15 +6,40 @@ import api from "../lib/api";
 export function WeatherWidget() {
     const [weather, setWeather] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
+        setLoading(true);
+        setError(null);
         api.get("/weather")
             .then(res => setWeather(res.data))
-            .catch(err => console.error("Weather fetch error", err))
+            .catch(err => {
+                console.error("Weather fetch error", err);
+                let errorMessage = "Failed to load weather data";
+                if (err.response?.data?.message) {
+                    errorMessage = err.response.data.message;
+                } else if (err.request) {
+                    errorMessage = "Network Error: Cannot connect to server";
+                }
+                setError(errorMessage);
+            })
             .finally(() => setLoading(false));
     }, []);
 
     if (loading) return <div className="h-48 animate-pulse rounded-xl bg-stone-200"></div>;
+
+    if (error) {
+        return (
+            <Card className="bg-red-50 border-red-200 shadow-sm h-48 flex items-center justify-center">
+                <CardContent className="text-center p-6">
+                    <Cloud className="h-12 w-12 text-red-400 mx-auto mb-2" />
+                    <p className="text-red-700 font-medium mb-1">Weather Unavailable</p>
+                    <p className="text-red-500 text-sm">{error}</p>
+                </CardContent>
+            </Card>
+        );
+    }
+
     if (!weather) return null;
 
     return (

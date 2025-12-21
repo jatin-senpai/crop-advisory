@@ -1,6 +1,6 @@
 import express from "express";
 import middleware from "../middleware.js";
-import { cropRules } from "../cropRules.js";
+import { cropRules } from "../croprules.js";
 
 const router = express.Router();
 

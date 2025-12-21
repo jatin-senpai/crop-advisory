@@ -9,59 +9,79 @@
 
 ## ✨ Key Features
 
--   **🤖 AI Crop Advisor**: Get crop recommendations based on soil, water, and season.
-    -   **Fertilizer Schedule**: Detailed timeline for nutrient application.
-    -   **Profit Calculator**: Estimates revenue based on real-time market prices.
-    -   **Full Guide**: Market demand, risk factors, and expert tips.
--   **💬 Kisan AI Assistant**: A 24/7 dedicated chatbot (powered by **Google Gemini**) to answer any farming query in simple language.
--   **💰 Live Mandi Prices**: Check real-time crop prices in your nearest mandi using government data (Open Government Data Platform India).
--   **tbl_Weather Updates**: Auto-detected location-based weather forecast to plan farming activities.
--   **🔐 Secure Access**: User authentication to save your farm profile and location.
+- **🤖 AI Crop Advisor**: Personalized crop recommendations based on soil type, water availability, and season.
+    - **Fertilizer Schedule**: Detailed timeline for nutrient application.
+    - **Profit Calculator**: Revenue estimates based on real-time market trends.
+    - **Agronomic Guide**: In-depth data on market demand, risk factors, and intercropping.
+- **💬 Kisan AI Assistant**: A 24/7 dedicated chatbot powered by **Google Gemini** to answer farming queries in local contexts.
+- **💰 Live Mandi Prices**: Real-time crop price tracking from nearest mandis using **data.gov.in** (Open Government Data Platform India).
+- **🌦️ Real-time Weather**: Accurate weather forecasts to help plan sowing, irrigation, and harvesting.
+- **📖 About Us**: Learn about our mission to digitize Indian agriculture.
+- **🔐 Secure Profiles**: Personalized dashboard that saves your farm location and preferences.
 
 ## 🛠️ Tech Stack
 
 ### Frontend
--   **React + Vite**: For a blazing fast, modern UI.
--   **TailwindCSS**: For a premium, responsive, and accessible design.
--   **Lucide Icons**: Beautiful, lightweight vector icons.
+- **React + Vite**: Fast and interactive user interface.
+- **TailwindCSS**: Modern, responsive design system.
+- **Lucide Icons**: Intuitive iconography.
+- **Axios**: Seamless API communication.
 
 ### Backend
--   **Node.js & Express**: Robust and scalable server.
--   **MongoDB**: Flexible database for user profiles.
--   **Google Gemini API**: For the intelligent chatbot.
--   **OpenWeatherMap API**: For real-time weather data.
--   **data.gov.in API**: For live agricultural market prices.
-
-## 👥 The Team
-Built with ❤️ by students passionate about Agritech:
--   **Jatin** - Lead Developer
--   **Monish** - Frontend Architect
--   **Hemant** - Backend Specialist
+- **Node.js & Express**: High-performance server architecture.
+- **MongoDB**: Scalable database for user and farm data.
+- **Google Gemini SDK**: Advanced AI capabilities.
+- **OpenWeatherMap API**: Localized weather data.
+- **Data.gov.in API**: Official market price feeds.
 
 ## ⚡ Getting Started
 
-1.  **Clone the repo**
-    ```bash
-    git clone https://github.com/yourusername/kisan-sahayak.git
-    ```
-2.  **Setup Backend**
-    ```bash
-    cd be
-    npm install
-    # Create .env file with MONGO_URL, SECRET_KEY, GEMINI_API_KEY, etc.
-    npm run dev
-    ```
-3.  **Setup Frontend**
-    ```bash
-    cd ../fe
-    npm install
-    npm run dev
-    ```
-4.  **Open Browser**
-    Visit `http://localhost:5173`
+### 1. Prerequisites
+- Node.js (v18+)
+- MongoDB Atlas account or local MongoDB instance
+
+### 2. Installation
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/kisan-sahayak.git
+cd kisan-sahayak
+```
+
+### 3. Backend Setup
+```bash
+cd be
+npm install
+```
+Create a `.env` file in the `be` directory:
+```env
+PORT=3000
+SECRET_KEY=your_jwt_secret
+MONGO_URL=your_mongodb_connection_string
+WEATHER_API_KEY=your_openweathermap_api_key
+DATA_GOV_API_KEY=your_data_gov_india_api_key
+GEMINI_API_KEY=your_google_gemini_api_key
+```
+Start the server:
+```bash
+npm run dev
+```
+
+### 4. Frontend Setup
+```bash
+cd ../fe
+npm install
+npm run dev
+```
+Visit `http://localhost:5173` to start using the app.
+
+## 👥 Meet the Team
+Built with ❤️ by students passionate about Agritech:
+- **Jatin** - Lead Developer
+- **Monish** - Frontend Architect
+- **Hemant** - Backend Specialist
 
 ## 📬 Contact
-Have questions? Reach out to us at [yshake1004@gmail.com](mailto:yshake1004@gmail.com).
+Have questions or suggestions? Reach out at [yshake1004@gmail.com](mailto:yshake1004@gmail.com).
 
 ---
 *© 2025 Kisan Sahayak. Jai Jawan, Jai Kisan.* 🇮🇳
