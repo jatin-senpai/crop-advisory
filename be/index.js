@@ -11,7 +11,6 @@ import cors from "cors";
 import axios from "axios";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import dotenv from "dotenv";
 
 import { SignupType, SigninType } from "./types.js";
 import { User } from "./DB/db.js";
