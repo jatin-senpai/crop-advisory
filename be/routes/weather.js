@@ -2,6 +2,8 @@ import express from "express";
 import axios from "axios";
 import middleware from "../middleware.js";
 import { User } from "../DB/db.js";
+import { normalizeCity } from "../utils.js";
+import https from "https";
 
 const router = express.Router();
 
@@ -18,28 +20,46 @@ router.get("/", middleware, async (req, res) => {
       return res.status(400).json({ message: "Location not set. Please update your profile." });
     }
 
-    const city = user.city.trim();
-    console.log(`Fetching weather for: '${city}'`);
+    const city = normalizeCity(user.city);
+    console.log(`Fetching weather for: '${city}' (original: '${user.city}')`);
 
-    const response = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather`,
-      {
-        params: {
-          q: city,
-          units: 'metric',
-          appid: process.env.WEATHER_API_KEY
-        },
-        httpsAgent: new (await import('https')).Agent({
-          rejectUnauthorized: false
-        })
-      }
-    );
+    const agent = new https.Agent({
+      rejectUnauthorized: false
+    });
 
-    res.json(response.data);
+    try {
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather`,
+        {
+          params: {
+            q: `${city},${user.state},IN`,
+            units: 'metric',
+            appid: process.env.WEATHER_API_KEY
+          },
+          httpsAgent: agent
+        }
+      );
+      return res.json(response.data);
+    } catch (apiError) {
+      console.warn("Retrying weather with city only...");
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather`,
+        {
+          params: {
+            q: city,
+            units: 'metric',
+            appid: process.env.WEATHER_API_KEY
+          },
+          httpsAgent: agent
+        }
+      );
+      return res.json(response.data);
+    }
+
   } catch (error) {
     console.error("Weather API Error:", error.response?.data || error.message);
     if (error.response?.status === 404 && user) {
-      return res.status(404).json({ message: `City '${user.city}' not found by weather provider` });
+      return res.status(404).json({ message: `Location '${user.city}' not found by weather provider` });
     }
     res.status(500).json({ message: "Failed to fetch weather data" });
   }

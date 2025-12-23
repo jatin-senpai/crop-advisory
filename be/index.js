@@ -25,6 +25,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+import { normalizeCity } from "./utils.js";
+
 const getLocationFromPincode = async (pincode) => {
   try {
     const response = await axios.get(
@@ -38,11 +40,11 @@ const getLocationFromPincode = async (pincode) => {
     }
 
     return {
-      city: postOffice.District,
+      city: normalizeCity(postOffice.District),
       state: postOffice.State
     };
   } catch (e) {
-    console.log(e);
+    console.error("Pincode API Error:", e.message);
     return { city: "", state: "" };
   }
 };
