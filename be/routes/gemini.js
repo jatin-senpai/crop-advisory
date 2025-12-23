@@ -13,7 +13,7 @@ router.post("/", middleware, async (req, res) => {
     }
 
     try {
-        const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
         const prompt = `
       You are an expert agricultural consultant named 'Kisan Sahayak AI'. 
@@ -35,10 +35,9 @@ router.post("/", middleware, async (req, res) => {
 
         res.json({ reply: text });
     } catch (error) {
-        console.error("Gemini API Error Message:", error.message);
-        console.error("Gemini API Full Error:", JSON.stringify(error, null, 2));
-        if (error.response) {
-            console.error("Gemini API Response Error:", error.response);
+        console.error("Gemini API Error:", error.message);
+        if (error.message.includes("leaked")) {
+            return res.status(403).json({ message: "API Key reported as leaked. Please update GEMINI_API_KEY in .env." });
         }
         res.status(500).json({ message: "AI is currently busy. Please try again later." });
     }
