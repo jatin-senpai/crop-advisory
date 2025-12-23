@@ -1,8 +1,16 @@
+import dotenv from "dotenv";
+dotenv.config();
+
+console.log("Environment variables loaded.");
+if (!process.env.SECRET_KEY) {
+  console.warn("WARNING: SECRET_KEY not found in .env!");
+}
+
 import express from "express";
 import cors from "cors";
 import axios from "axios";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 
 import { SignupType, SigninType } from "./types.js";
@@ -13,12 +21,12 @@ import weatherRoutes from "./routes/weather.js";
 import priceRoutes from "./routes/prices.js";
 import geminiRoutes from "./routes/gemini.js";
 
-dotenv.config();
-
 const app = express();
 
 app.use(express.json());
 app.use(cors());
+
+import { normalizeCity } from "./utils.js";
 
 const getLocationFromPincode = async (pincode) => {
   try {
@@ -33,11 +41,11 @@ const getLocationFromPincode = async (pincode) => {
     }
 
     return {
-      city: postOffice.District,
+      city: normalizeCity(postOffice.District),
       state: postOffice.State
     };
   } catch (e) {
-    console.log(e);
+    console.error("Pincode API Error:", e.message);
     return { city: "", state: "" };
   }
 };

@@ -2,8 +2,14 @@ import express from "express";
 import axios from "axios";
 import middleware from "../middleware.js";
 import { User } from "../DB/db.js";
+import { normalizeCity } from "../utils.js";
+import https from "https";
 
 const router = express.Router();
+
+const agent = new https.Agent({
+    rejectUnauthorized: false
+});
 
 router.get("/", middleware, async (req, res) => {
     const { crop } = req.query;
@@ -39,13 +45,13 @@ router.get("/", middleware, async (req, res) => {
                 const params = {
                     "api-key": process.env.DATA_GOV_API_KEY,
                     format: "json",
-                    limit: 5,
+                    limit: 10,
                     ...filterObj
                 };
 
                 const response = await axios.get(
                     "https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070",
-                    { params }
+                    { params, httpsAgent: agent }
                 );
                 return response.data.records || [];
             } catch (e) {
@@ -56,8 +62,16 @@ router.get("/", middleware, async (req, res) => {
 
         const getCoordinates = async (location) => {
             try {
+                const normalizedLocation = normalizeCity(location);
                 const response = await axios.get(
-                    `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.WEATHER_API_KEY}`
+                    `https://api.openweathermap.org/data/2.5/weather`,
+                    {
+                        params: {
+                            q: normalizedLocation,
+                            appid: process.env.WEATHER_API_KEY
+                        },
+                        httpsAgent: agent
+                    }
                 );
                 return response.data.coord;
             } catch (e) {
@@ -100,14 +114,15 @@ router.get("/", middleware, async (req, res) => {
             });
 
             if (records.length > 0) {
-                const userCoords = await getCoordinates(`${user.city},${user.state},In`);
+                const userCoords = await getCoordinates(`${user.city}, ${user.state}`);
 
                 if (userCoords) {
                     const uniqueDistricts = [...new Set(records.map(r => r.district))];
                     const districtCoordsMap = {};
 
-                    for (const district of uniqueDistricts.slice(0, 10)) {
-                        const coords = await getCoordinates(`${district},${user.state},In`);
+                    // Limit to top 5 districts for faster response
+                    for (const district of uniqueDistricts.slice(0, 5)) {
+                        const coords = await getCoordinates(`${district}, ${user.state}`);
                         if (coords) districtCoordsMap[district] = coords;
                     }
 

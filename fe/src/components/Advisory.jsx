@@ -70,7 +70,7 @@ export function Advisory() {
                         <div className="p-2 bg-yellow-100 rounded-lg text-yellow-600">
                             <Sprout className="h-6 w-6" />
                         </div>
-                        <CardTitle>AI Crop Advisor</CardTitle>
+                        <CardTitle>Crop Advisor</CardTitle>
                     </div>
                 </CardHeader>
                 <CardContent>
