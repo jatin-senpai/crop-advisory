@@ -22,6 +22,10 @@ import geminiRoutes from "./routes/gemini.js";
 
 const app = express();
 
+app.get("/test", (req, res) => {
+  res.json({ message: "Backend is alive and healthy! 🛸" });
+});
+
 app.use(express.json());
 app.use(cors());
 

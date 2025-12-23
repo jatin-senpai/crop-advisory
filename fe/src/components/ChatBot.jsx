@@ -35,8 +35,9 @@ export function ChatBot() {
             const botMessage = res.data.reply;
             setMessages(prev => [...prev, { text: botMessage, isUser: false }]);
         } catch (error) {
-            const errorMessage = error.response?.data?.message || "Sorry, I'm having trouble connecting right now. Please try again.";
-            setMessages(prev => [...prev, { text: errorMessage, isUser: false }]);
+            console.error("ChatBot Error:", error);
+            const errorMessage = error.response?.data?.message || error.message || "Connection failed. Please try again.";
+            setMessages(prev => [...prev, { text: `Error: ${errorMessage}`, isUser: false }]);
         } finally {
             setIsLoading(false);
         }
