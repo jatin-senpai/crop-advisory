@@ -35,7 +35,11 @@ router.post("/", middleware, async (req, res) => {
 
         res.json({ reply: text });
     } catch (error) {
-        console.error("Gemini API Error:", error);
+        console.error("Gemini API Error Message:", error.message);
+        console.error("Gemini API Full Error:", JSON.stringify(error, null, 2));
+        if (error.response) {
+            console.error("Gemini API Response Error:", error.response);
+        }
         res.status(500).json({ message: "AI is currently busy. Please try again later." });
     }
 });
