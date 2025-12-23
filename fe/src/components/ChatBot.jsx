@@ -35,7 +35,8 @@ export function ChatBot() {
             const botMessage = res.data.reply;
             setMessages(prev => [...prev, { text: botMessage, isUser: false }]);
         } catch (error) {
-            setMessages(prev => [...prev, { text: "Sorry, I'm having trouble connecting right now. Please try again.", isUser: false }]);
+            const errorMessage = error.response?.data?.message || "Sorry, I'm having trouble connecting right now. Please try again.";
+            setMessages(prev => [...prev, { text: errorMessage, isUser: false }]);
         } finally {
             setIsLoading(false);
         }
@@ -73,8 +74,8 @@ export function ChatBot() {
                         {messages.map((msg, idx) => (
                             <div key={idx} className={`flex ${msg.isUser ? 'justify-end' : 'justify-start'}`}>
                                 <div className={`max-w-[85%] p-3 rounded-2xl text-sm ${msg.isUser
-                                        ? 'bg-green-600 text-white rounded-br-none'
-                                        : 'bg-white border border-stone-200 text-stone-800 rounded-bl-none shadow-sm'
+                                    ? 'bg-green-600 text-white rounded-br-none'
+                                    : 'bg-white border border-stone-200 text-stone-800 rounded-bl-none shadow-sm'
                                     }`}>
                                     {msg.text}
                                 </div>

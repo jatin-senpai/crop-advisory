@@ -6,6 +6,7 @@ const router = express.Router();
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 router.post("/", middleware, async (req, res) => {
+    console.log(`🤖 Gemini request received: "${req.body.message?.substring(0, 30)}..."`);
     const { message } = req.body;
 
     if (!message) {
