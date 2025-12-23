@@ -6,8 +6,9 @@ import { User } from "../DB/db.js";
 const router = express.Router();
 
 router.get("/", middleware, async (req, res) => {
+  let user;
   try {
-    const user = await User.findById(req.userId);
+    user = await User.findById(req.userId);
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -28,8 +29,6 @@ router.get("/", middleware, async (req, res) => {
           units: 'metric',
           appid: process.env.WEATHER_API_KEY
         },
-        // Fix for "self-signed certificate in certificate chain"
-        // in dev environments or behind proxies
         httpsAgent: new (await import('https')).Agent({
           rejectUnauthorized: false
         })
@@ -39,8 +38,7 @@ router.get("/", middleware, async (req, res) => {
     res.json(response.data);
   } catch (error) {
     console.error("Weather API Error:", error.response?.data || error.message);
-    if (error.response?.status === 404) {
-      // 404 from OWM means city not found
+    if (error.response?.status === 404 && user) {
       return res.status(404).json({ message: `City '${user.city}' not found by weather provider` });
     }
     res.status(500).json({ message: "Failed to fetch weather data" });
