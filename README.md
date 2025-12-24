@@ -43,8 +43,8 @@
 ### 2. Installation
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/kisan-sahayak.git
-cd kisan-sahayak
+git clone https://github.com/jatin-senpai/crop-advisory.git
+cd crop-advisory
 ```
 
 ### 3. Backend Setup
