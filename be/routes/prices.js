@@ -38,7 +38,7 @@ router.get("/", middleware, async (req, res) => {
 
         const aliases = getCommodityAliases(crop);
 
-        // Function to fetch with specific params
+       
         const fetchPrices = async (filterObj) => {
             try {
                 console.log("Fetching with filters:", filterObj);

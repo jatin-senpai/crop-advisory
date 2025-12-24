@@ -4,7 +4,7 @@ import { Button } from "../components/ui/Button";
 import { Input } from "../components/ui/Input";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/Card";
 import api from "../lib/api";
-import { Sprout } from "lucide-react";
+import { Leaf } from "lucide-react";
 
 export default function Signup() {
     const [formData, setFormData] = useState({
@@ -40,9 +40,9 @@ export default function Signup() {
         <div className="flex min-h-screen items-center justify-center bg-stone-50 p-4">
             <Card className="w-full max-w-md">
                 <CardHeader className="text-center">
-                    <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-yellow-100">
-                        <Sprout className="h-6 w-6 text-yellow-600" />
-                    </div>
+                    <Link to="/" className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-50 hover:bg-green-100 transition-colors border border-green-100">
+                        <Leaf className="h-6 w-6 text-green-700" />
+                    </Link>
                     <CardTitle>Join Crop Advisory</CardTitle>
                     <p className="text-sm text-stone-500">Create your account</p>
                 </CardHeader>
@@ -76,7 +76,7 @@ export default function Signup() {
                             required
                         />
                         {error && <p className="text-sm text-red-500 break-words">{error}</p>}
-                        <Button type="submit" variant="secondary" className="w-full">
+                        <Button type="submit" className="w-full bg-green-700 hover:bg-green-800 text-white">
                             Sign Up
                         </Button>
                         <p className="text-center text-sm text-stone-500">

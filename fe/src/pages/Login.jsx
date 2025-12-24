@@ -27,9 +27,9 @@ export default function Login() {
         <div className="flex min-h-screen items-center justify-center bg-stone-50 p-4">
             <Card className="w-full max-w-md">
                 <CardHeader className="text-center">
-                    <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
-                        <Leaf className="h-6 w-6 text-green-600" />
-                    </div>
+                    <Link to="/" className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-50 hover:bg-green-100 transition-colors border border-green-100">
+                        <Leaf className="h-6 w-6 text-green-700" />
+                    </Link>
                     <CardTitle>Welcome Back</CardTitle>
                     <p className="text-sm text-stone-500">Sign in to your account</p>
                 </CardHeader>
@@ -54,7 +54,7 @@ export default function Login() {
                             />
                         </div>
                         {error && <p className="text-sm text-red-500">{error}</p>}
-                        <Button type="submit" className="w-full">
+                        <Button type="submit" className="w-full bg-green-700 hover:bg-green-800 text-white">
                             Sign In
                         </Button>
                         <p className="text-center text-sm text-stone-500">

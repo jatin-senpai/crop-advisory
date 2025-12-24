@@ -16,8 +16,8 @@ export default function About() {
             {/* Header for navigation back */}
             <header className="sticky top-0 z-50 w-full border-b border-stone-200 bg-white/80 backdrop-blur-md">
                 <div className="container mx-auto flex h-16 items-center px-4">
-                    <Link to="/dashboard" className="flex items-center text-stone-600 hover:text-green-700 transition-colors">
-                        <ArrowLeft className="h-5 w-5 mr-2" /> Back to Dashboard
+                    <Link to="/" className="flex items-center text-stone-600 hover:text-green-700 transition-colors">
+                        <ArrowLeft className="h-5 w-5 mr-2" /> Back to Home
                     </Link>
                 </div>
             </header>

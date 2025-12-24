@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
+import Landing from "./pages/Landing";
+import About from "./pages/About";
 
 function ProtectedRoute({ children }) {
   const token = localStorage.getItem("token");
@@ -10,12 +12,11 @@ function ProtectedRoute({ children }) {
   return children;
 }
 
-import About from "./pages/About";
-
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/about" element={<About />} />
@@ -24,7 +25,6 @@ function App() {
             <Dashboard />
           </ProtectedRoute>
         } />
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </BrowserRouter>
   );
