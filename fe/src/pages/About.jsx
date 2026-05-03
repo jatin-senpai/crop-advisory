@@ -7,8 +7,7 @@ import { Button } from "../components/ui/Button";
 export default function About() {
     const team = [
         { name: "Jatin", role: "Lead Developer", quote: "Innovating for farmers." },
-        { name: "Monish", role: "Frontend Architect", quote: "Designing with empathy." },
-        { name: "Hemant", role: "Backend Specialist", quote: "Powering the platform." }
+        
     ];
 
     return (
