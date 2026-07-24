@@ -22,3 +22,7 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# TypeScript / bundler caches
+*.tsbuildinfo
+.vite/
